@@ -11,17 +11,20 @@ if (passwordLength < 8 || passwordLength >128) {
   passwordLength = prompt("1. How many characters would you like your password to be? Choose between 8-128");
 }
 
-//ask user for password case
-var chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-let upper= prompt("2. Would you like your password to include uppercase letters? (Y/N)");
 
-//Need to check for appropriate responses
-if (upper.toLowerCase() != "n" || upper.toLowerCase() != "y"){
-  console.log("Please enter Y or N");
-  upper= prompt("2b. Would you like your password to include uppercase letters? (Y/N)");
+let chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+//create function to answer questions --> checks for correct format
+function getResponse(question) {
+  let respone= prompt(question);
+  while (response.toLowerCase() != "n" && response.toLowerCase() != "y") {
+    console.log("Please enter Y or N");
+    response= prompt (question);
+
+  }
 }
 
-//removing all uppercase letters from the string
+let upper= getResponse("2. Would you like your password to include uppercase letters? (Y/N)");
 if (upper.toLowerCase()=== "n"){
   for (var i=0; i<chars.length; i++){
     if (chars[i] === chars[i].toUppercase() ){
@@ -31,13 +34,7 @@ if (upper.toLowerCase()=== "n"){
 }
 
 //ask user if they want lower case
-let lower= prompt("3. Would you like your password to include lowercase lettters? (Y/N)");
-
-//Need to check for appropriate responses
-if (lower.toLowerCase() != "n" || lower.toLowerCase() != "y"){
-  console.log("Please enter Y or N");
-  lower= prompt("3b. Would you like your password to include uppercase letters? (Y/N)");
-}
+let lower= getResponse("3. Would you like your password to include lowercase lettters? (Y/N)");
 
 //removing all lowercase letters from the string
 if (lower.toLowerCase()=== "n"){
@@ -48,15 +45,8 @@ if (lower.toLowerCase()=== "n"){
   }
 }
 
-
 //ask user if they desire numbers
-let numbers= prompt("4. Would you like your password to include numbers? (Y/N)");
-
-//Need to check for appropriate responses
-if (numbers.toLowerCase() != "n" || numbers.toLowerCase() != "y"){
-  console.log("Please enter Y or N");
-  numbers= prompt("4b. Would you like your password to include uppercase letters? (Y/N)");
-}
+let numbers= getResponse("4. Would you like your password to include numbers? (Y/N)");
 
 //removing all numbers from the string
 if (numbers.toLowerCase()=== "n"){
@@ -66,15 +56,8 @@ if (numbers.toLowerCase()=== "n"){
     }
   }
 }
-
 //ask user if they desire special characters
-let special= prompt("5. Would you like your password to include special characters? (Y/N)");
-
-//Need to check for appropriate responses
-if (special.toLowerCase() != "n" || special.toLowerCase() != "y"){
-  console.log("Please enter Y or N");
-  special= prompt("5b. Would you like your password to include special characters? (Y/N)");
-}
+let special= getResponse("5. Would you like your password to include special characters? (Y/N)");
 
 //removing all special characters from the string !@#$%^&*()
 if (special.toLowerCase()=== "n"){
@@ -85,18 +68,19 @@ if (special.toLowerCase()=== "n"){
   }
 }
 
+//create generatePassword() function
+//for loop to create password
+//need Math.random to create password
 function generatePassword (){
-  var password="";
-  for (var i=0; i<passwordLength; i++){
-    var random= Math.floor(Math.random()*chars.length);
-    password += chars.substring(random, random+1);
+  let password="";
+  for (let i=0; i<passwordLength; i++){
+    let random= Math.floor(Math.random()*chars.length);
+    password += chars.charAt(random);
   }
   return password;
 }
 
-//create generatePassword() function
-//for loop to create password
-//need Math.random to create password
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
