@@ -11,7 +11,6 @@ if (passwordLength < 8 || passwordLength >128) {
   passwordLength = prompt("1. How many characters would you like your password to be? Choose between 8-128");
 }
 
-
 let chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 //create function to answer questions --> checks for correct format
@@ -20,8 +19,8 @@ function getResponse(question) {
   while (response.toLowerCase() != "n" && response.toLowerCase() != "y") {
     console.log("Please enter Y or N");
     response= prompt (question);
-
   }
+  return respone;
 }
 
 let upper= getResponse("2. Would you like your password to include uppercase letters? (Y/N)");
