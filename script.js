@@ -1,32 +1,30 @@
 // Assignment code here
-
-//What happens if they say no to all?
-//code is only works if all responses are yes -
-
+//output is not correct i.e. yes upper and no the rest
+//accepting values outside 8 and 128
 
 //Asking user for password length; should I use var or let?
-let passwordLength = prompt("How many characters would you like your password to be? Choose between 8-128");
-if (passwordLength < 8 || passwordLength >128) {
+let passwordLength = prompt("How many characters would you like your password to have? Choose between 8-128?");
+while (passwordLength < 8 || passwordLength >128) {
   console.log("Please enter a value between 8-128");
-  passwordLength = prompt("1. How many characters would you like your password to be? Choose between 8-128");
+  passwordLength;
+}
+
+//create function to answer questions --> checks for correct format
+function getResponse(question) {
+  let response= prompt(question);
+  while (response.toLowerCase() !== "n" && response.toLowerCase() !== "y") {
+    console.log("Please enter Y or N");
+    response= prompt(question);
+  }
+  return response;
 }
 
 let chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-//create function to answer questions --> checks for correct format
-function getResponse(question) {
-  let respone= prompt(question);
-  while (response.toLowerCase() != "n" && response.toLowerCase() != "y") {
-    console.log("Please enter Y or N");
-    response= prompt (question);
-  }
-  return respone;
-}
-
 let upper= getResponse("2. Would you like your password to include uppercase letters? (Y/N)");
 if (upper.toLowerCase()=== "n"){
   for (var i=0; i<chars.length; i++){
-    if (chars[i] === chars[i].toUppercase() ){
+    if (chars[i] === chars[i].toUpperCase() ){
       chars=chars.substring(0, i-1) + chars.substring(i+1);
     }
   }
@@ -38,7 +36,7 @@ let lower= getResponse("3. Would you like your password to include lowercase let
 //removing all lowercase letters from the string
 if (lower.toLowerCase()=== "n"){
   for (var i=0; i<chars.length; i++){
-    if (chars[i] === chars[i].toLowercase() ){
+    if (chars[i] === chars[i].toLowerCase() ){
       chars=chars.substring(0, i-1) + chars.substring(i+1);
     }
   }
