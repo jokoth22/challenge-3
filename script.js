@@ -1,95 +1,79 @@
-// Assignment code here
-//output is not correct i.e. yes upper and no the rest
-//accepting values outside 8 and 128
-
-//Asking user for password length; should I use var or let?
-let passwordLength = prompt("How many characters would you like your password to have? Choose between 8-128?");
-while (passwordLength < 8 || passwordLength >128) {
-  console.log("Please enter a value between 8-128");
-  passwordLength;
-}
-
-//create function to answer questions --> checks for correct format
-function getResponse(question) {
-  let response= prompt(question);
-  while (response.toLowerCase() !== "n" && response.toLowerCase() !== "y") {
-    console.log("Please enter Y or N");
-    response= prompt(question);
-  }
-  return response;
-}
-
-let chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-let upper= getResponse("2. Would you like your password to include uppercase letters? (Y/N)");
-if (upper.toLowerCase()=== "n"){
-  for (var i=0; i<chars.length; i++){
-    if (chars[i] === chars[i].toUpperCase() ){
-      chars=chars.substring(0, i-1) + chars.substring(i+1);
-    }
-  }
-}
-
-//ask user if they want lower case
-let lower= getResponse("3. Would you like your password to include lowercase lettters? (Y/N)");
-
-//removing all lowercase letters from the string
-if (lower.toLowerCase()=== "n"){
-  for (var i=0; i<chars.length; i++){
-    if (chars[i] === chars[i].toLowerCase() ){
-      chars=chars.substring(0, i-1) + chars.substring(i+1);
-    }
-  }
-}
-
-//ask user if they desire numbers
-let numbers= getResponse("4. Would you like your password to include numbers? (Y/N)");
-
-//removing all numbers from the string
-if (numbers.toLowerCase()=== "n"){
-  for (var i=0; i<chars.length; i++){
-    if (chars[i] == 1 || chars[i] == 2 || chars[i] == 3 || chars[i] == 4 || chars[i] == 5 || chars[i] == 6 || chars[i] == 7 || chars[i] == 8 || chars[i] == 9 || chars[i] == 0 ){
-      chars = chars.substring(0, i-1) + chars.substring(i+1);
-    }
-  }
-}
-//ask user if they desire special characters
-let special= getResponse("5. Would you like your password to include special characters? (Y/N)");
-
-//removing all special characters from the string !@#$%^&*()
-if (special.toLowerCase()=== "n"){
-  for (var i=0; i<chars.length; i++){
-    if (chars[i] == "!" || chars[i] == "@" || chars[i] == "#" || chars[i] == "$"|| chars[i] == "%" || chars[i] == "^" || chars[i] == "&" || chars[i] == "*" || chars[i] == "(" || chars[i] == ")" ){
-      chars = chars.substring(0, i-1) + chars.substring(i+1);
-    }
-  }
-}
-
 //create generatePassword() function
 //for loop to create password
 //need Math.random to create password
-function generatePassword (){
-  let password="";
-  for (let i=0; i<passwordLength; i++){
-    let random= Math.floor(Math.random()*chars.length);
-    password += chars.charAt(random);
+var options= "";
+var count=0;
+
+var choices = {
+    upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    lower: 'abcdefghijklmnopqrstuvwxyz',
+    nums: '0123456789',
+    special: '!@#$%^&*()'
+};
+
+//Ask user for length of password while checking to if input is a numerical value between 8-128
+let passwordLength=prompt("How many characters would you like your password to have? Choose between 8-128?");
+while (isNaN(passwordLength) || passwordLength < 8 || passwordLength >128) {
+  passwordLength = prompt("Invalid input. Please enter a number between 8-128.");
+}
+//To do: use confirm box to ask yes or no for options && create temp variable
+//ask user for uppercase letters
+let includeUpper = confirm("Would you like your password to include uppercase letters? (Y/N)\n Y - OK or N-Cancel.");
+  if (includeUpper) {
+      options += choices.upper;
+      count++; 
+    }
+    console.log(count);
+    console.log(options);
+   //ask user for lowercase letters
+let includeLower = confirm("Would you like your password to include lowercase letters? (Y/N)\n Y - OK or N-Cancel.");
+  if (includeLower) {
+      options += choices.lower; 
+      count++;
+    }
+    console.log(count);
+    console.log(options);
+   //ask user for numbers letters
+ let includeNumbers = confirm("Would you like your password to include numbers? (Y/N)\n Y - OK or N-Cancel.");
+   if (includeNumbers) {
+       options += choices.nums;
+       count++; 
+     }
+     console.log(count);
+     console.log(options);
+   //ask user for special letters
+ let includeSpecial = confirm("Would you like your password to include special characters? (Y/N)\n Y - OK or N-Cancel.");
+   if (includeSpecial) {
+       options += choices.special;
+       count++; 
+   }
+   console.log(count);
+   console.log(options);
+
+//check user choose at least two options or create random password
+if(count===0){
+  options = choices.upper + choices.lower + choices.nums + choices.special;
+  console.log(options);
+}
+
+function generatePassword (options, length){
+  let password="";  
+  for (let i=0; i< length; i++){
+      let randomIndex= Math.floor(Math.random()*options.length);
+      password += options.charAt(randomIndex);
+    }
+    return password;
   }
-  return password;
-}
-
-
-
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+  
+  // Get references to the #generate element
+  var generateBtn = document.querySelector("#generate");
+  
+  // Write password to the #password input
+  function writePassword() {
+    var password = generatePassword(options, passwordLength);
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
+  }
+  
+  // Add event listener to generate button
+  generateBtn.addEventListener("click", writePassword);
