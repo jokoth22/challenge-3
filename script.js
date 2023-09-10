@@ -1,8 +1,7 @@
-//create generatePassword() function
-//for loop to create password
-//need Math.random to create password
+//initialized variables to create password
 var options = "";
 var count = 0;
+
 //initialized password character options as an object
 var choices = {
   upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
@@ -10,6 +9,8 @@ var choices = {
   nums: '0123456789',
   special: '!@#$%^&*()'
 };
+
+//alert informing user they will be asked a series of questions about creating a password
 
 //Ask user for length of password while checking to if input is a numerical value between 8-128
 let passwordLength = prompt("How many characters would you like your password to have? Choose between 8-128?");

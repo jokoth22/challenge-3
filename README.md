@@ -1,9 +1,7 @@
-# Password Generator Starter Code
+# JavaScript Challenge: Password Generator
 
-# User Story
-AS AN employee with access to sensitive data
-I WANT to randomly generate a password that meets certain criteria
-SO THAT I can create a strong password that provides greater security
+## Description
+This week's Challenge required me to create an application that an employee can use to generate a random password based on criteria they've selected. This app will run in the browser, and will feature dynamically updated HTML and CSS powered by JavaScript code I wrote. This challenge allowed me to demonstrate my ability to create dynamic HTMl and CSS using JavaScrpt. The task was to help an employee generate a strong password that provides greater security to access sensitive data. I learned how to create window prompts and take in user information using JavaScript. 
 
 # Acceptance Criteria
 GIVEN I need a new, secure password
